@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--Using Expression Wbb-->
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Untitled 1</title>
+</head>
+
+<body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            if (window.location.hash) {
+                var hash = window.location.hash.substr(1); //Puts hash in variable, and removes the # character
+                if (hash == "hidetop=1") {
+                    $("#hidetop").text("Hiện top 5");
+                    $("#Description").css("display", "none");
+                    $("#OneRow").hide("fast");
+                    $("#hidetop").attr("href", "#hidetop=0");
+                    $("[id$='hf_hash']").val("#hidetop=1");
+                }
+            }
+            $(window).bind("hashchange", function () {
+                if (window.location.hash) {
+                    var hash = window.location.hash.substr(1); //Puts hash in variable, and removes the # character
+                    if (hash != "hidetop=1") {
+                        $("#OneRow").show("fast");
+                        $("#hidetop").text("Ẩn top 5");
+                        $("#Description").css("display", "");
+                        $("#hidetop").attr("href", "#hidetop=1");
+                        //window.location.hash = "#hidetop=0";
+                        $("[id$='hf_hash']").val("#hidetop=0");
+                    }
+                    else {
+                        $("#hidetop").text("Hiện top 5");
+                        $("#Description").css("display", "none");
+                        $("#OneRow").hide("fast");
+                        $("#hidetop").attr("href", "#hidetop=0");
+                        //window.location.hash = "#hidetop=1";
+                        $("[id$='hf_hash']").val("#hidetop=1");
+                    }
+                }
+                else {
+                    $("#hidetop").text("Ẩn top 5");
+                    $("#Description").css("display", "");
+                    $("#OneRow").show("fast");
+                    $("#hidetop").attr("href", "#hidetop=1");
+                    var loc = window.location.href;
+                    var index = loc.indexOf('#');
+                    if (index > 0) {
+                        window.location = loc.substring(0, index);
+                    } //$("[id$='hf_hash']").val("#hidetop=0")
+
+                }
+            });
+            $("#hidetop").click(function () {
+                if ("onhashchange" in window) {
+                    if (window.location.hash) {
+                        var hash = window.location.hash.substr(1); //Puts hash in variable, and removes the # character
+                        if (hash == "hidetop=1") {
+                            window.location.hash = "#hidetop=0";
+                        } else
+                            window.location.hash = "#hidetop=1";
+                    }
+                }
+                else {
+                    if (window.location.hash) {
+                        var hash = window.location.hash.substr(1); //Puts hash in variable, and removes the # character
+                        if (hash == "hidetop=1") {
+                            $("#OneRow").show("fast");
+                            $(this).text("Ẩn top 5");
+                            $("#Description").css("display", "");
+                            $(this).attr("href", "#hidetop=1");
+                            window.location.hash = "#hidetop=0";
+                            $("[id$='hf_hash']").val("#hidetop=0");
+                        }
+                        else {
+                            $(this).text("Hiện top 5");
+                            $("#Description").css("display", "none");
+                            $("#OneRow").hide("fast");
+                            $(this).attr("href", "#hidetop=0");
+                            window.location.hash = "#hidetop=1";
+                            $("[id$='hf_hash']").val("#hidetop=1");
+                        }
+                    }
+                    else {
+                        $(this).text("Hiện top 5");
+                        $("#Description").css("display", "none");
+                        $("#OneRow").hide("fast");
+                        $(this).attr("href", "#hidetop=0");
+                        window.location.hash = "#hidetop=1";
+                        $("[id$='hf_hash']").val("#hidetop=1")
+
+                    }
+                }
+            });
+        });
+    </script>
+    <a id="hidetop" href="#hidetop=1">Ẩn top 5</a>
+    <br />
+    <div id="Description" class="description">
+    Description
+    </div>
+    <div id="OneRow">
+        OneRow    </div>
+        ccccccccccccccccccc After
+        <!--Hidden using to rebuid hash on rerect (PRG Patten)-->
+        <input id="MainContent_MainContentPlaceHolder_ListProduct1_hf_hash" type="hidden" name="ctl00$ctl00$MainContent$MainContentPlaceHolder$ListProduct1$hf_hash">
+    
+</body>
+
+</html>
